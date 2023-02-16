@@ -1,12 +1,24 @@
 # proc_export_zos
 
-SAS on mf does not like/have built in, the csv export function.
-This will enable you to make a variable file file of concatenated DLM data
+Background:
+  SAS on z/OS does not like / have built into it, the csv export function.
 
-Clearly, your file max lrecl will need to be able to hold this data - which is going to flex in size depending on column count and width of data
-So results may be limited or not work as desired - depending on dataset
+This public work will enable you to make a variable file file of concatenated DLM data.
+  The aim is to make a macro function with features to :
+  * export up to 2x headers
+    * field name
+    *SAS format
+  * rows up to N observaions - default 999999 - so you could whittle the sample beforehand or use this
+  * provie an optional where (&expression) clause
 
-this is intended for non-critical work, clearly.
+Outputs:
+  The output on z/OS will need to be into an allocated file.
+  * So clearly, your file max lrecl will need to be able to hold this data - which is going to flex in size depending on column count and width of data
+  * Therefore results for *all* datasets may vary or fail at times - depending on the dataset - too many columns, or data too wide - could exceed max lrecl.
 
-
-haha.. discovered %DS2CSV().. brilliant. saved me work
+Disclaimer:
+  So this is intended for non-critical work.
+  
+See also:
+  As an interim solution, the z/OS platform does have SAS macro %DS2CSV() built in.
+  This is pretty good, and for now I am using it with a view to seeing how to improve upon it.
