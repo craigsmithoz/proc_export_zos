@@ -7,3 +7,6 @@ Clearly, your file max lrecl will need to be able to hold this data - which is g
 So results may be limited or not work as desired - depending on dataset
 
 this is intended for non-critical work, clearly.
+
+
+haha.. discovered %DS2CSV().. brilliant. saved me work
