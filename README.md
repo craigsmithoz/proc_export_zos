@@ -22,3 +22,5 @@ Disclaimer:
 See also:
   As an interim solution, the z/OS platform does have SAS macro %DS2CSV() built in.
   This is pretty good, and for now I am using it with a view to seeing how to improve upon it.
+  
+  See the sample_jcl.txt for something to use at present.
