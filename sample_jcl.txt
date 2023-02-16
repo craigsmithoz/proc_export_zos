@@ -1,0 +1,41 @@
+//CO70590A JOB ,'PROC EXPORT',CLASS=A,MSGCLASS=X,MSGLEVEL=(1,1),        
+//         NOTIFY=&SYSUID                                               
+//*                                                                     
+/*JOBPARM SYSAFF=SAS                                                    
+//*                                                                     
+//**********************************************************************
+//*                                                                     
+//* SAS PROC EXPORT TO FIXED FILE BELOW                                 
+//*                                                                     
+//  SET TARGET=<USERID>.FB32760.CSV       <== CHANGE ALL ON THIS      
+//*                                                                     
+//* SAS LIBRARY:                                                        
+//*   LIBRARY DATASET:  YOUR.SAS.DSNAME     <== CHANGE ALL ON THIS      
+//*   LIBRARY MEMBER:   MBR                 <== CHANGE ALL ON THIS      
+//*   OBS:              100                 <== CHANGE ALL ON THIS      
+//*                                                                     
+//**********************************************************************
+//*                                                                     
+//DELETE   EXEC IEFBR14                                                 
+//DD1      DD DSN=&TARGET.,DISP=(MOD,DELETE),SPACE=(TRK,1)              
+//*                                                                     
+//DEFINE   EXEC IEFBR14                                                 
+//DD1      DD DSN=&TARGET.,DISP=(,CATLG),SPACE=(CYL,(1,1),RLSE),        
+//            DCB=(RECFM=FB,LRECL=32760,BLKSIZE=0)                      
+//*                                                                     
+//STEP1    EXEC AS                                                 
+//WORK     DD UNIT=DISK,SPACE=(CYL,(500,200))                      
+//SASLOG   DD SYSOUT=*                                             
+//SASLIST  DD SYSOUT=*                                             
+//OUT      DD SYSOUT=*                                             
+//*                                                                
+//DDLIB    DD DISP=SHR,DSN=YOUR.SAS.DSNAME    <--- My Lib          
+//*                                                                
+//SYSIN    DD *                                                    
+                                                                   
+DATA WORK.TEMP;                                                    
+  SET DDLIB.MBR                                               
+      (OBS=100);                                                   
+RUN;                                                               
+                                                                   
+%DS2CSV(DATA=WORK.TEMP, RUNMODE=B, CSVFILE=<USERID>.FB32760.CSV);
