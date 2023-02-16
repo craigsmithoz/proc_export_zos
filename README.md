@@ -1,7 +1,9 @@
 # proc_export_zos
 
 Background:
-  SAS on z/OS does not like / have built into it, the csv export function.
+  SAS on z/OS does not like / have built into it, the proc export function.
+  I would normally wrapper that in a macro on other platforms, and make it write CSV files etc.. for quick file sampling offloads.
+  So you can't do that so easliy on mainframe, and the interactive sas tool is limited in cols and width,
 
 This public work will enable you to make a variable file file of concatenated DLM data.
   The aim is to make a macro function with features to :
